@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bilgisayarlı Tasarım Uygulamaları</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="theme-modern">
+    <div id="app">
+        <header>
+            <h1>Bilgisayarlı Tasarım Uygulamaları</h1>
+            <div class="header-btns">
+                <button id="themeMenuBtn" class="icon-btn" title="Tema Seç"><i class="fas fa-palette"></i></button>
+                <button id="infoBtn" class="icon-btn" title="Bilgi"><i class="fas fa-info-circle"></i></button>
+            </div>
+        </header>
+
+        <nav>
+            <button id="showCards" class="nav-main active"><i class="fas fa-clone"></i> Kartlar</button>
+            <button id="showTest" class="nav-main"><i class="fas fa-vial"></i> Test</button>
+        </nav>
+
+        <main id="content">
+            </main>
+
+        <footer>
+            <div class="footer-links">
+                <a href="https://fatihpatir.github.io/web" target="_blank" class="author">Fatih PATIR</a>
+                <span class="divider">|</span>
+                <a href="https://korkutelinenehatun.meb.k12.tr/" target="_blank" class="school">Nene Hatun MTAL</a>
+            </div>
+            <div class="location">Bilişim Teknolojileri Öğretmeni - Korkuteli/Antalya</div>
+        </footer>
+    </div>
+
+    <div id="themeModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Tema Seçimi</h2>
+                <span class="close" id="closeTheme">&times;</span>
+            </div>
+            <div class="theme-grid">
+                <div class="theme-opt" onclick="setTheme('theme-modern')" style="background: #1a1a2e; color: #fff;">Gece Mavisi</div>
+                <div class="theme-opt" onclick="setTheme('theme-classic')" style="background: #ffffff; color: #333; border: 1px solid #ddd;">Klasik Beyaz</div>
+                <div class="theme-opt" onclick="setTheme('theme-dark')" style="background: #121212; color: #ffeb3b;">Yüksek Kontrast</div>
+                <div class="theme-opt" onclick="setTheme('theme-soft')" style="background: #f0f4f8; color: #2d3748;">Yumuşak Gri</div>
+                <div class="theme-opt" onclick="setTheme('theme-ocean')" style="background: #0077b6; color: #fff;">Okyanus</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="infoModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Uygulama Bilgileri</h2>
+                <span class="close" id="closeInfo">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="info-item">
+                    <i class="fas fa-user-tie"></i>
+                    <div>
+                        <strong>Programcı:</strong>
+                        <p>Fatih PATIR</p>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-school"></i>
+                    <div>
+                        <strong>Okul:</strong>
+                        <p>Nene Hatun MTAL - Bilişim Teknolojileri</p>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-mobile-alt"></i>
+                    <div>
+                        <strong>PWA Kurulumu:</strong>
+                        <p id="installText">Android/PC için 'Yükle' butonuna basın. iOS için 'Paylaş' menüsünden 'Ana Ekrana Ekle'yi seçin.</p>
+                    </div>
+                </div>
+                <button id="installBtn" class="big-btn primary" style="display:none;"><i class="fas fa-download"></i> Uygulamayı Ana Ekrana Ekle</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
