@@ -3,88 +3,183 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bilgisayarlı Tasarım Uygulamaları</title>
+    <title>BTU Çalışma PWA</title>
     <link rel="stylesheet" href="style.css">
     <link rel="manifest" href="manifest.json">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <meta name="theme-color" content="#6366f1">
+    <link rel="apple-touch-icon" href="icons/icon-192.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
-<body class="theme-modern">
-    <div id="app">
-        <header>
-            <h1>Bilgisayarlı Tasarım Uygulamaları</h1>
-            <div class="header-btns">
-                <button id="themeMenuBtn" class="icon-btn" title="Tema Seç"><i class="fas fa-palette"></i></button>
-                <button id="infoBtn" class="icon-btn" title="Bilgi"><i class="fas fa-info-circle"></i></button>
+<body>
+    <canvas id="confetti-canvas"></canvas>
+
+    <div class="container">
+        <!-- Top Bar for Install & Info -->
+        <div class="top-bar">
+            <button class="icon-btn" onclick="app.showModal('modal-info')" title="Bilgi">i</button>
+            <button class="icon-btn" id="btn-theme" onclick="app.toggleTheme()" title="Tema Değiştir" style="margin-left: 0.5rem;">🎨</button>
+            <button class="icon-btn" id="btn-sound" onclick="app.toggleSound()" title="Sesi Aç/Kapat" style="margin-left: 0.5rem;">🔊</button>
+            <div class="search-bar">
+                <input type="text" id="search-input" class="search-input" placeholder="Teknik terim ara..." oninput="app.handleSearch(this.value)">
             </div>
-        </header>
+            <button class="icon-btn" id="btn-install" style="display: none;" onclick="app.installApp()" title="Uygulamayı Yükle">📥</button>
+        </div>
 
-        <nav>
-            <button id="showCards" class="nav-main active"><i class="fas fa-clone"></i> Kartlar</button>
-            <button id="showTest" class="nav-main"><i class="fas fa-vial"></i> Test</button>
-        </nav>
-
-        <main id="content">
-            </main>
-
-        <footer>
-            <div class="footer-links">
-                <a href="https://fatihpatir.github.io/web" target="_blank" class="author">Fatih PATIR</a>
-                <span class="divider">|</span>
-                <a href="https://korkutelinenehatun.meb.k12.tr/" target="_blank" class="school">Nene Hatun MTAL</a>
+        <!-- Home View -->
+        <div id="view-home" class="view active">
+            <header>
+                <h1>BTU Çalışma Portalı</h1>
+                <p>Mühendislik ve Tasarım Bilgi Platformu</p>
+            </header>
+            
+            <div id="search-results" style="display: none; margin-bottom: 2rem;">
+                <h3 style="margin-bottom: 1rem;">Arama Sonuçları</h3>
+                <div class="grid" id="search-grid"></div>
+                <hr style="margin-top: 2rem; border-color: var(--glass-border);">
             </div>
-            <div class="location">Bilişim Teknolojileri Öğretmeni - Korkuteli/Antalya</div>
-        </footer>
-    </div>
 
-    <div id="themeModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>Tema Seçimi</h2>
-                <span class="close" id="closeTheme">&times;</span>
+            <div class="grid" id="exam-grid">
+                <!-- Cards will be injected here -->
             </div>
-            <div class="theme-grid">
-                <div class="theme-opt" onclick="setTheme('theme-modern')" style="background: #1a1a2e; color: #fff;">Gece Mavisi</div>
-                <div class="theme-opt" onclick="setTheme('theme-classic')" style="background: #ffffff; color: #333; border: 1px solid #ddd;">Klasik Beyaz</div>
-                <div class="theme-opt" onclick="setTheme('theme-dark')" style="background: #121212; color: #ffeb3b;">Yüksek Kontrast</div>
-                <div class="theme-opt" onclick="setTheme('theme-soft')" style="background: #f0f4f8; color: #2d3748;">Yumuşak Gri</div>
-                <div class="theme-opt" onclick="setTheme('theme-ocean')" style="background: #0077b6; color: #fff;">Okyanus</div>
+        </div>
+
+        <!-- Selection View -->
+        <div id="view-selection" class="view">
+            <div class="nav-header">
+                <button class="btn btn-secondary" onclick="app.showHome()">← Geri Dön</button>
+                <button class="btn btn-secondary" onclick="app.printNotes()">📄 Ders Notu Yazdır</button>
+            </div>
+            <header>
+                <h2 id="selection-title">Sınav Başlığı</h2>
+                <p>Çalışma ve Oyun Modları</p>
+            </header>
+            
+            <div class="grid">
+                <div class="card glow-card" onclick="app.startStudy()">
+                    <span class="card-icon">📚</span>
+                    <h3 class="card-title">Çalışma</h3>
+                    <p class="card-desc">Soru-Cevap kartlarını incele.</p>
+                </div>
+                <div class="card glow-card" onclick="app.startFlashcards()">
+                    <span class="card-icon">🎴</span>
+                    <h3 class="card-title">Bilgi Kartları</h3>
+                    <p class="card-desc">20 Kategori bazlı terim kartı.</p>
+                </div>
+                <div class="card glow-card" onclick="app.startTFGame()">
+                    <span class="card-icon">⚡</span>
+                    <h3 class="card-title">Doğru/Yanlış</h3>
+                    <p class="card-desc">Hızlı karar ver, puanları topla!</p>
+                </div>
+                <div class="card glow-card" onclick="app.startWordGame()">
+                    <span class="card-icon">🧩</span>
+                    <h3 class="card-title">Kelime Tahmin</h3>
+                    <p class="card-desc">Tasarım terimlerini tahmin et.</p>
+                </div>
+                <div class="card glow-card" onclick="app.startTestMode()">
+                    <span class="card-icon">📝</span>
+                    <h3 class="card-title">Klasik Test</h3>
+                    <p class="card-desc">4 şıklı klasik uygulama sınavı.</p>
+                </div>
+                <div class="card glow-card" onclick="app.startTimeAttack()">
+                    <span class="card-icon">⏱️</span>
+                    <h3 class="card-title">Zamanla Yarış</h3>
+                    <p class="card-desc">60 saniyede en yüksek skor!</p>
+                </div>
+                <div class="card glow-card" onclick="app.start3DTest()">
+                    <span class="card-icon">🧊</span>
+                    <h3 class="card-title">Görünüş Testi</h3>
+                    <p class="card-desc">3B Bakış açısı ve analiz testi.</p>
+                </div>
+                <div class="card glow-card" onclick="app.start3DViewer()">
+                    <span class="card-icon">🕹️</span>
+                    <h3 class="card-title">3D Galeri</h3>
+                    <p class="card-desc">Temel geometrik formları incele.</p>
+                </div>
+            </div>
+            
+            <div id="leaderboard-area" style="margin-top: 3rem; background: var(--bg-card); padding: 2rem; border-radius: 1.5rem;">
+                <h3 style="font-family: 'Orbitron'; margin-bottom: 1rem;">🏆 ONUR KÖŞESİ (Top Scores)</h3>
+                <div id="leaderboard-content"></div>
+            </div>
+        </div>
+
+        <!-- Content Views -->
+        <div id="view-content" class="view">
+            <div class="nav-header">
+                <button class="btn btn-secondary" onclick="app.showSelection()">← Menüye Dön</button>
+                <button class="btn btn-secondary btn-print-mini" onclick="app.printNotes()">📄 Yazdır</button>
+                <div id="game-stats" style="font-family: 'Orbitron'; color: var(--neon-blue); display: flex; gap: 1rem; align-items: center; margin-left: auto;">
+                    <span id="stat-score"></span>
+                    <span id="stat-timer" style="color: #ef4444; font-weight: 700;"></span>
+                </div>
+            </div>
+            <div id="content-container">
+                <!-- Data will be injected here -->
             </div>
         </div>
     </div>
 
-    <div id="infoModal" class="modal">
+    <!-- Modals -->
+    <div id="modal-info" class="modal" onclick="if(event.target === this) app.closeModals()">
         <div class="modal-content">
-            <div class="modal-header">
-                <h2>Uygulama Bilgileri</h2>
-                <span class="close" id="closeInfo">&times;</span>
-            </div>
-            <div class="modal-body">
-                <div class="info-item">
-                    <i class="fas fa-user-tie"></i>
-                    <div>
-                        <strong>Programcı:</strong>
-                        <p>Fatih PATIR</p>
-                    </div>
-                </div>
-                <div class="info-item">
-                    <i class="fas fa-school"></i>
-                    <div>
-                        <strong>Okul:</strong>
-                        <p>Nene Hatun MTAL - Bilişim Teknolojileri</p>
-                    </div>
-                </div>
-                <div class="info-item">
-                    <i class="fas fa-mobile-alt"></i>
-                    <div>
-                        <strong>PWA Kurulumu:</strong>
-                        <p id="installText">Android/PC için 'Yükle' butonuna basın. iOS için 'Paylaş' menüsünden 'Ana Ekrana Ekle'yi seçin.</p>
-                    </div>
-                </div>
-                <button id="installBtn" class="big-btn primary" style="display:none;"><i class="fas fa-download"></i> Uygulamayı Ana Ekrana Ekle</button>
+            <span class="modal-close" onclick="app.closeModals()">&times;</span>
+            <h2 style="font-family: 'Orbitron'; margin-bottom: 1.5rem; color: var(--neon-blue);">Uygulama Bilgisi</h2>
+            <p style="margin-bottom: 1rem; line-height: 1.6;">Bu uygulama, <b>Bilgisayarlı Tasarım Uygulamaları</b> ders kitabı referans alınarak öğrencilerin sınavlara daha interaktif hazırlanması için geliştirilmiştir.</p>
+            <p style="margin-bottom: 1rem;">İçerik Editörü ve Geliştirici:<br><b>Fatih PATIR</b><br>Bilişim Teknolojileri Öğretmeni</p>
+            <div id="user-achievements" style="margin-top: 2rem; border-top: 1px solid var(--glass-border); padding-top: 1rem;">
+                <h4 style="font-family: 'Orbitron'; font-size: 0.8rem; color: var(--text-dim); margin-bottom: 1rem;">KAZANILAN ROZETLER</h4>
+                <div id="badge-container" style="display: flex; flex-wrap: wrap; gap: 10px;"></div>
             </div>
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <!-- Hidden Print Area -->
+    <div id="print-area" class="print-only"></div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <a href="https://fatihpatir.github.io/web" target="_blank" class="footer-name">Fatih PATIR</a>
+            <p class="footer-location">Korkuteli / Antalya</p>
+        </div>
+    </footer>
+
+    <!-- Modals -->
+    <div id="modal-info" class="modal">
+        <div class="modal-content glass">
+            <span class="modal-close" onclick="app.closeModals()">&times;</span>
+            <h3>Hakkında</h3>
+            <p style="margin: 1.5rem 0; line-height: 1.6; color: var(--text-dim);">
+                Bu uygulama, <strong>Bilgisayarlı Tasarım Uygulaması</strong> ders kitabından referans alınarak 
+                öğrencilerin sınavlara daha eğlenceli ve etkili bir şekilde hazırlanabilmesi için geliştirilmiştir.
+            </p>
+            <p style="font-weight: 600;">Emeği Geçenler:</p>
+            <p style="color: var(--primary);">Fatih PATIR - Bilişim Teknolojileri Öğretmeni</p>
+        </div>
+    </div>
+
+    <div id="modal-ios" class="modal">
+        <div class="modal-content glass text-center">
+            <span class="modal-close" onclick="app.closeModals()">&times;</span>
+            <h3>iOS için Yükle</h3>
+            <p style="margin: 1rem 0;">iPhone veya iPad cihazınıza yüklemek için:</p>
+            <ol style="text-align: left; margin: 1rem 0; padding-left: 1.5rem; color: var(--text-dim);">
+                <li>Safari tarayıcısında en alttaki <strong>Paylaş</strong> (Yukarı ok) butonuna basın.</li>
+                <li>Menüyü yukarı kaydırıp <strong>Ana Ekrana Ekle</strong> seçeneğine tıklayın.</li>
+                <li>Gelen sayfada <strong>Ekle</strong> butonuna basarak işlemi tamamlayın.</li>
+            </ol>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="data.js"></script>
+    <script src="app.js"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js');
+        }
+    </script>
 </body>
 </html>
