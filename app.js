@@ -265,6 +265,22 @@ const app = {
   },
 
   // --- Game Modes ---
+  startSummary() {
+    const container = document.getElementById('content-container');
+    container.innerHTML = `
+      <div class="game-container" style="display:block; text-align:left;">
+        <h2 style="margin-bottom:2rem; text-align:center;">Hızlı Konu Özeti</h2>
+        <div class="q-card" style="border-left: 5px solid var(--primary); padding: 2rem; background:rgba(255,255,255,0.02);">
+          <div style="font-size:1.1rem; line-height:1.8; color:var(--text-main);">
+            ${this.activeExam.summary}
+          </div>
+        </div>
+        <button class="btn" style="margin-top:2rem; width:100%;" onclick="app.showSelection()">Anladım, Testlere Hazırım!</button>
+      </div>
+    `;
+    this.showView('view-content');
+  },
+
   startStudy() {
     const container = document.getElementById('content-container');
     container.innerHTML = `<h2>${this.activeExam.title}</h2><div id="study-list"></div>`;

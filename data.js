@@ -2,6 +2,7 @@ const EXAM_DATA = [
   {
     id: 'teknik-resim',
     title: 'Teknik Resim',
+    summary: '<b>Çizgi ve Yazı:</b> Teknik resimde sürekli kalın çizgi görünen kenarlar için, kesik orta çizgi ise görünmeyen kısımlar içindir. Standart yazılar 75 derece eğik olmalıdır. <br><br><b>Geometri ve Görünüş:</b> Alın (Ön), Profil (Yan) ve Yatay (Üst) düzlemlere bakış açısı çıkarılır. Ölçekler (1:2 küçültme, 2:1 büyütme) gerçek boyuta oranlar.',
     questions: [
       { q: "Teknik resimde kullanılan sürekli kalın çizgi nerede kullanılır?", a: "Görünen çevreler ve kenarlarda kullanılır." },
       { q: "Kesik orta kalınlıktaki çizginin (----) kullanım alanı nedir?", a: "Görünmeyen çevreler ve kenarlarda kullanılır." },
@@ -40,6 +41,7 @@ const EXAM_DATA = [
   {
     id: 'tinkercad',
     title: 'Tinkercad & 3D Tasarım',
+    summary: '<b>Temel Araçlar:</b> Tinkercad bulut tabanlı bir 3D tasarım aracıdır. Hole (Delik) ve Group (Grupla) özellikleri ile karmaşık formlar oluşturulur. <br><br><b>Dosya Yönetimi:</b> Tasarımlar .STL (3D Yazıcı) veya .SVG (Vektör) olarak dışa aktarılabilir. Align (Hizala) ve Ruler (Cetvel) hassas yerleşim için kritiktir.',
     questions: [
       { q: "Tinkercad'de bir nesneyi diğerinden çıkarmak için hangi özellik kullanılır?", a: "Nesnenin şekil ayarlarından 'Hole' (Delik) özelliği seçilir." },
       { q: "'Group' komutu katı ve delik nesnelerle nasıl çalışır?", a: "Gruplandığında delik nesnesinin hacmi katı nesneden silinir." },
@@ -78,6 +80,7 @@ const EXAM_DATA = [
   {
     id: 'fusion-intro',
     title: 'Fusion 360 - Temel',
+    summary: '<b>Sektörel Tasarım:</b> CAD (Tasarım), CAM (Üretim) ve CAE (Analiz) süreçlerini birleştiren profesyonel araçtır. Parametrik modelleme sayesinde bir ölçü değiştiğinde tüm yapı güncellenir. <br><br><b>Montaj:</b> Component (Bileşen) yapısı ve Joint (Eklem) tipleri (Rigid, Revolute) ile parçalar arası mekanik ilişkiler kurulur.',
     questions: [
       { q: "Parametrik modellemenin avantajı nedir?", a: "Ölçü değişince tüm modelin otomatik güncellenmesidir." },
       { q: "CAD ve CAM farkı nedir?", a: "CAD tasarım, CAM üretim (makine kodları) sürecidir." },
@@ -116,6 +119,7 @@ const EXAM_DATA = [
   {
     id: 'fusion-advanced',
     title: 'Fusion 360 - İleri',
+    summary: '<b>Karmaşık Formlar:</b> Sweep (Yol boyu sür), Loft (Geçiş örme) ve Shell (Kabuk yap) gibi ileri komutlar kullanılır. <br><br><b>Analiz ve İşleme:</b> Rib (Dayanıklılık duvarı) ile yapılar güçlendirilir. Render aşamasında fotoğraf kalitesinde görüntüler alınırken, Simulation ile fiziksel dayanıklılık test edilir.',
     questions: [
       { q: "Joint komutu ne işe yarar?", a: "Bileşenleri bağlar ve hareket tanımlar." },
       { q: "Rigid ve Revolute farkı nedir?", a: "Biri tamamen sabit, diğeri dairesel hareketlidir." },
