@@ -649,7 +649,7 @@ footer .location {
   position: fixed;
   bottom: 80px;
   left: 50%;
-  transform: translateX(-50%) translateY(100px);
+  transform: translateX(-50%) translateY(200px);
   background: var(--bg-card);
   border: 1px solid var(--neon-blue);
   padding: 1rem 2rem;
@@ -659,10 +659,11 @@ footer .location {
   align-items: center;
   gap: 1rem;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-  transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.5s;
+  opacity: 0; pointer-events: none;
 }
 
-#achievement-toast.show { transform: translateX(-50%) translateY(0); }
+#achievement-toast.show { transform: translateX(-50%) translateY(0); opacity: 1; pointer-events: auto; }
 
 /* Animation Overlays */
 .fail-flash {
