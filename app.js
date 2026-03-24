@@ -236,6 +236,10 @@ const app = {
   showSelection(exam) {
     this.activeExam = exam || this.activeExam;
     document.getElementById('selection-title').innerText = this.activeExam.title;
+    const subTitle = document.querySelector('#view-selection header p');
+    if (subTitle) {
+      subTitle.innerHTML = `<span style="color:var(--primary); font-weight:700;">${this.getSubjectFor(this.activeExam.id)}</span><br>Çalışma ve Oyun Modları`;
+    }
     this.renderLeaderboard();
     this.showView('view-selection');
   },
@@ -253,7 +257,9 @@ const app = {
       card.className = 'card glow-card';
       card.innerHTML = `${isDone ? '<span class="progress-badge">TAMAMLANDI</span>' : ''}
         <div class="card-icon">${this.getIconFor(exam.id)}</div>
-        <h3 class="card-title">${exam.title}</h3><p class="card-desc">20 Bilgi Kartı, Oyunlar ve Testler.</p>`;
+        <h3 class="card-title">${exam.title}</h3>
+        <p class="card-desc" style="color: var(--primary); font-weight: 600; margin-bottom: 0.5rem;">${this.getSubjectFor(exam.id)}</p>
+        <p class="card-desc">20 Bilgi Kartı, Oyunlar ve Testler.</p>`;
       card.onclick = () => this.showSelection(exam);
       grid.appendChild(card);
     });
@@ -262,6 +268,16 @@ const app = {
   getIconFor(id) {
     const icons = { 'teknik-resim': '📐', 'tinkercad': '🧊', 'fusion-intro': '⚙️', 'fusion-advanced': '🚀' };
     return icons[id] || '📝';
+  },
+
+  getSubjectFor(id) {
+    const subjects = { 
+      'teknik-resim': 'Temel Teknik Resim', 
+      'tinkercad': 'İz Düşüm ve Tinkercad', 
+      'fusion-intro': 'Fusion 360 Giriş', 
+      'fusion-advanced': 'Fusion 360 İleri' 
+    };
+    return subjects[id] || '';
   },
 
   handleSearch(query) {

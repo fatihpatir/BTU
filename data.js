@@ -1,8 +1,8 @@
 const EXAM_DATA = [
   {
     id: 'teknik-resim',
-    title: 'Teknik Resim',
-    summary: `<h3 style="color:var(--primary); margin-top:0;">1. Ünite: Temel Teknik Resim</h3>
+    title: '1. Dönem 1. Sınav',
+    summary: `<h3 style="color:var(--primary); margin-top:0;">1. Dönem 1. Sınav: Temel Teknik Resim</h3>
 <p style="margin-bottom:15px; font-style:italic; color:var(--text-dim);">Bu bölüm, bilgisayarın başına geçmeden önceki en kritik aşamadır; çünkü iyi bir tasarımın temeli doğru teknik kurallara dayanır.</p>
 
 <strong style="color:var(--accent);">1. Çizgi ve Yazı Normları</strong>
@@ -66,8 +66,8 @@ const EXAM_DATA = [
   },
   {
     id: 'tinkercad',
-    title: 'Tinkercad & 3D Tasarım',
-    summary: `<h3 style="color:var(--primary); margin-top:0;">2. Ünite: İz Düşüm ve Tinkercad Giriş</h3>
+    title: '1. Dönem 2. Sınav',
+    summary: `<h3 style="color:var(--primary); margin-top:0;">1. Dönem 2. Sınav: Tinkercad Giriş</h3>
 <p style="margin-bottom:15px; font-style:italic; color:var(--text-dim);">Bu aşamada 2 boyutlu kağıttan 3 boyutlu dijital dünyaya geçiş yapıyoruz.</p>
 
 <strong style="color:var(--accent);">1. Üç Görünüş Mantığı</strong>
@@ -131,8 +131,8 @@ const EXAM_DATA = [
   },
   {
     id: 'fusion-intro',
-    title: 'Fusion 360 - Temel',
-    summary: `<h3 style="color:var(--primary); margin-top:0;">3. Ünite: Dijital Üretim ve Parametrik Modelleme</h3>
+    title: '2. Dönem 1. Sınav',
+    summary: `<h3 style="color:var(--primary); margin-top:0;">2. Dönem 1. Sınav: Fusion 360 Giriş</h3>
 <p style="margin-bottom:15px; font-style:italic; color:var(--text-dim);">Artık profesyonel dijital üretim süreçlerine (Fusion 360 vb.) ve 3D yazıcı teknolojilerine giriyoruz.</p>
 
 <strong style="color:var(--accent);">1. CAD, CAM ve Modelleme</strong>
@@ -195,8 +195,8 @@ const EXAM_DATA = [
   },
   {
     id: 'fusion-advanced',
-    title: 'Fusion 360 - İleri',
-    summary: `<h3 style="color:var(--primary); margin-top:0;">4. Ünite: İleri Modelleme ve Simülasyon</h3>
+    title: '2. Dönem 2. Sınav',
+    summary: `<h3 style="color:var(--primary); margin-top:0;">2. Dönem 2. Sınav: Fusion 360 İleri</h3>
 <p style="margin-bottom:15px; font-style:italic; color:var(--text-dim);">Yılın sonunda, karmaşık mekanizmalar ve estetik tasarımlar yapma aşamasına geliyoruz.</p>
 
 <strong style="color:var(--accent);">1. Hacim Veren Form Komutları</strong>
